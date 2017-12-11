@@ -1,10 +1,10 @@
-This is the simple DNS not secure but it is good for testing on a local system. Do not use this DNC on public because it is not secure.
+##This is the simple DNS not secure but it is good for testing on a local system. Do not use this DNC on public because it is not secure.
 
 #yum install bind bind-utils
 
 
 #vim /etc/named.conf
-## Add This line
+#### Add This line ###
 
  listen-on port 53 { 127.0.0.1;10.0.15.0/24; };
         #listen-on-v6 port 53 { ::1; };
@@ -25,7 +25,7 @@ This is the simple DNS not secure but it is good for testing on a local system. 
 
 #######################
 
-#create forward zone. In some cases people create file like .db extension this is nothing, it is a text files just add db at the end.
+##create forward zone. In some cases people create file like .db extension this is nothing, it is a text files just add db at the end.
 
 [root@kube1 ~]# vim /var/named/forward.example.com
 
@@ -51,7 +51,7 @@ test2    IN A            10.0.15.42
 kube2    IN A            10.0.15.62
 kube3    IN A            10.0.15.63
 
-#creat reverse dns
+##creat reverse dns
 [root@kube1 ~]# vim /var/named/reverse.example.com 
 $TTL 86400
 @ IN  SOA     kube1.example.com. root.example.com. (
@@ -78,14 +78,14 @@ kube3    IN A            10.0.15.63
 
 ## finally check configuratiuon for dns
 #named-checkconf
-## if your dns doesnt have any error than it will not show anything
+# if your dns doesnt have any error than it will not show anything
 
 ##Now chaecking zone for forward zone
 [root@kube1 ~]# named-checkzone example.com /var/named/forward.example.com 
 zone example.com/IN: loaded serial 201811252
 OK
 [root@kube1 ~]# 
-##ok means you dont have any error
+#ok means you dont have any error
 
 ## checking zone for reverse dns
 [root@kube1 ~]# named-checkzone example.com /var/named/reverse.example.com 
@@ -98,7 +98,7 @@ zone example.com/IN: loaded serial 201811252
 OK
 [root@kube1 ~]# 
 ###################
-## Restart your dns
+# Restart your dns
 # systemctl start named
 # systemctl enable named
 ################
@@ -111,7 +111,7 @@ search example.com
 nameserver 10.0.15.61
 [root@kube1 ~]# 
 
-# now you can check your dns like this now here my dns resolve by both way....
+## now you can check your dns like this now here my dns resolve by both way....
 
 [root@kube1 ~]# nslookup kube2.example.com
 Server:		10.0.15.61
